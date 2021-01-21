@@ -18,6 +18,6 @@ router.put('/employee/update/:id', employee.updateEmployeeData);
 // Delete an Employee with EmployeeId
 router.delete('/employee/delete/:id', employee.deleteEmployeeData);
 
-console.log("router running");
+console.log("Router is running");
 
 module.exports = router;

@@ -2,11 +2,26 @@ const mongoose = require("mongoose");
 
 const EmployeeSchema = mongoose.Schema(
   {
-    firstName: String,
-    lastName: String,
-    email: String,
-    department: String,
-    salary: String,
+    firstName: {
+      type: String,
+      required: true
+    },
+    lastName: {
+      type: String,
+      required: true
+    },
+    email: {
+      type: String,
+      required: true
+    },
+    department: {
+      type: String,
+      required: true
+    },
+    salary: {
+      type: Number,
+      required: true
+    }
   },
   {
     timestamps: true,
@@ -16,6 +31,8 @@ const EmployeeSchema = mongoose.Schema(
 const employee = mongoose.model("employee", EmployeeSchema);
 
 class EmployeeModel {
+
+  // Create and Save a Employee Data
   create = (body) => {
     console.log("Request Data in Model");
     return new Promise((resolve, reject) => {
@@ -26,12 +43,13 @@ class EmployeeModel {
           console.log("Success Full", data);
         })
         .catch((err) => {
-          console.log(err);
+          console.log("Error in Model");
           reject(err);
         });
     });
   };
 
+  // Retrieve all Employee's Data
   getAll = (req) => {
     console.log("Request Data in Model");
     return new Promise((resolve, reject) => {
@@ -48,6 +66,7 @@ class EmployeeModel {
     });
   };
 
+  // Retrieve a single Employee with EmployeeId
   getOne = (id) => {
     console.log("Request One Emp Data by id in Model");
     return new Promise((resolve, reject) => {
@@ -64,6 +83,7 @@ class EmployeeModel {
     });
   };
 
+  // Update an Employee with EmployeeId
   update = (req, a) => {
     console.log("Update One Emp Data by id--in Model",);
     return new Promise((resolve, reject) => {
@@ -92,6 +112,7 @@ class EmployeeModel {
 
   };
 
+  // Delete an Employee with EmployeeId
   delete = (id) => {
     console.log("Delete One Emp Data by id--in Model");
     return new Promise((resolve, reject) => {
@@ -99,7 +120,7 @@ class EmployeeModel {
         .findByIdAndRemove(id)
         .then((data) => {
           resolve(data);
-          console.log("Get Data Successfull", data);
+          console.log("Delete Data Successfull", data);
         })
         .catch((err) => {
           console.log(err);

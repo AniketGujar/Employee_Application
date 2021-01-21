@@ -2,25 +2,26 @@ const { response } = require("express");
 const service = require("../service/employeeService");
 
 class EmployeeController {
-  // Create and Save a new Note
+
+  // Create and Save a Employee Data
   create = (req, res) => {
     console.log("Data in Controller ", req.body);
     service
       .createService(req.body)
       .then((data) => {
-        response.success = true;
-        response.message = "Employee Registered Sucessfully";
-        response.data = data;
+        response.success = data.status;
+        response.message = data.message;
+        response.data = data.data;
         return res.status(200).send(response);
       })
       .catch((err) => {
         response.success = false;
-        (response.message = "error:"), err;
-        response.data = err;
+        response.message = err;
         return res.status(400).send(response);
       });
   };
 
+  // Retrieve all Employee's Data
   getAllData = (req, res) => {
     console.log("Data in Controller ", req.body);
     service
@@ -36,6 +37,7 @@ class EmployeeController {
       });
   };
 
+  // Retrieve a single Employee with EmployeeId
   getOneEmployeeData = (req, res) => {
     console.log("Data in Controller ", req.body);
     service
@@ -51,6 +53,7 @@ class EmployeeController {
       });
   };
 
+  // Update an Employee with EmployeeId
   updateEmployeeData = (req, res) => {
     console.log("Data in Controller ", req.body);
     service
@@ -66,6 +69,7 @@ class EmployeeController {
       });
   };
 
+  // Delete an Employee with EmployeeId
   deleteEmployeeData = (req, res) => {
     console.log("Data in Controller ", req.body);
     service
@@ -76,7 +80,7 @@ class EmployeeController {
         return res.status(200).send(response);
       })
       .catch((err) => {
-        (response.message = "error:"), err;
+        response.message = "error:", err;
         return res.status(400).send(response);
       });
   };

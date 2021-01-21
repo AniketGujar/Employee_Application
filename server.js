@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
     res.json({ "message": "Welcome to Employee Management Program" });
 });
 
-// Require Notes routes
+// Require Employee routes
 app.use('/api', route);
 
 // listen for requests
