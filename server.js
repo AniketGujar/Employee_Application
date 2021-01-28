@@ -2,10 +2,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const dbConfig = require('./config/databaseConfig');
 const mongoose = require('mongoose');
+const cors = require('cors')
 const route = require('./app/routes/employeeRoutes.js')
 
 // create express app
 const app = express();
+
+app.use(cors());
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -30,7 +33,7 @@ app.get('/', (req, res) => {
     res.json({ "message": "Welcome to Employee Management Program" });
 });
 
-// Require Employee routes
+// Require routes
 app.use('/api', route);
 
 // listen for requests
